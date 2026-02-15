@@ -73,25 +73,14 @@ Accurately predicting purchase intent enables e-commerce platforms to personaliz
 
 ```
 project-folder/
-│── app.py                  # Streamlit web application
+│── app.py                  # Streamlit web application (trains models on-the-fly)
 │── requirements.txt        # Python dependencies
 │── README.md               # This file
-│── data/
-│   ├── online_shoppers.csv # Full dataset
-│   └── test_data.csv       # Test split for demo
 │── model/
-│   ├── train_models.py     # Model training script
-│   ├── logistic_regression.pkl
-│   ├── decision_tree.pkl
-│   ├── knn.pkl
-│   ├── naive_bayes.pkl
-│   ├── random_forest.pkl
-│   ├── xgboost.pkl
-│   ├── scaler.pkl
-│   ├── label_encoders.pkl
-│   ├── results.json
-│   └── feature_names.json
+│   └── train_models.py     # Standalone model training script
 ```
+
+> **Note:** The Streamlit app generates the dataset and trains all 6 models at startup using Streamlit's caching (`@st.cache_resource`), so no `.pkl` model files or `.csv` data files are needed in the repository. The `model/train_models.py` script is provided as a standalone reference for model training and evaluation.
 
 ## How to Run Locally
 
@@ -130,3 +119,5 @@ Deployed on **Streamlit Community Cloud**.
 - Streamlit
 - Pandas, NumPy
 - Matplotlib, Seaborn
+
+---
