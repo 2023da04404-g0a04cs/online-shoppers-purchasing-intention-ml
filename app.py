@@ -3,7 +3,7 @@ Online Shoppers Purchasing Intention - Streamlit App
 ====================================================
 Interactive ML Classification Dashboard
 Dataset: Online Shoppers Purchasing Intention (UCI ML Repository)
-All models are trained on-the-fly — no .pkl files needed in the repo.
+Note: All models are trained on-the-fly — no .pkl files needed in the repo.
 """
 
 import streamlit as st
@@ -280,11 +280,11 @@ def main():
         results, trained_models = train_all_models(X_train, y_train, X_test, y_test)
 
     # ─── Sidebar ──────────────────────────────────────────────────────────────
-    st.sidebar.title("⚙️ Controls")
+    st.sidebar.title("Controls")
 
     model_names = list(results.keys())
     selected_model = st.sidebar.selectbox(
-        "🔍 Select Classification Model",
+        "Select Classification Model",
         model_names,
         index=0,
         help="Choose a model to view its detailed results"
@@ -292,7 +292,7 @@ def main():
 
     st.sidebar.markdown("---")
 
-    st.sidebar.subheader("📁 Upload Test Data")
+    st.sidebar.subheader("Upload Test Data")
     uploaded_file = st.sidebar.file_uploader(
         "Upload CSV file (test data)",
         type=['csv'],
@@ -310,10 +310,10 @@ def main():
 
     # ─── Tabs ─────────────────────────────────────────────────────────────────
     tab1, tab2, tab3, tab4 = st.tabs([
-        "📊 Model Comparison",
-        "🔬 Selected Model Details",
-        "📈 Uploaded Data Results",
-        "ℹ️ About"
+        "Model Comparison",
+        "Selected Model Details",
+        "Uploaded Data Results",
+        "About"
     ])
 
     # ─── Tab 1: Model Comparison ──────────────────────────────────────────────
@@ -357,11 +357,11 @@ def main():
 
         col1, col2 = st.columns(2)
         with col1:
-            st.success(f"🏆 **Best Accuracy:** {best_acc[0]} ({best_acc[1]['metrics']['Accuracy']:.4f})")
-            st.info(f"📈 **Best AUC:** {best_auc[0]} ({best_auc[1]['metrics']['AUC']:.4f})")
+            st.success(f"**Best Accuracy:** {best_acc[0]} ({best_acc[1]['metrics']['Accuracy']:.4f})")
+            st.info(f"**Best AUC:** {best_auc[0]} ({best_auc[1]['metrics']['AUC']:.4f})")
         with col2:
-            st.warning(f"⚡ **Best F1:** {best_f1[0]} ({best_f1[1]['metrics']['F1']:.4f})")
-            st.error(f"📊 **Best MCC:** {best_mcc[0]} ({best_mcc[1]['metrics']['MCC']:.4f})")
+            st.warning(f"**Best F1:** {best_f1[0]} ({best_f1[1]['metrics']['F1']:.4f})")
+            st.error(f"**Best MCC:** {best_mcc[0]} ({best_mcc[1]['metrics']['MCC']:.4f})")
 
     # ─── Tab 2: Selected Model Details ────────────────────────────────────────
     with tab2:
@@ -419,7 +419,7 @@ def main():
         if uploaded_file is not None:
             try:
                 uploaded_df = pd.read_csv(uploaded_file)
-                st.success(f"✅ Uploaded: {uploaded_file.name} ({uploaded_df.shape[0]} rows, {uploaded_df.shape[1]} columns)")
+                st.success(f"Uploaded: {uploaded_file.name} ({uploaded_df.shape[0]} rows, {uploaded_df.shape[1]} columns)")
 
                 st.subheader("Data Preview")
                 st.dataframe(uploaded_df.head(10), use_container_width=True)
@@ -465,12 +465,12 @@ def main():
                     report_text = classification_report(y_true, y_pred, target_names=['No Purchase', 'Purchase'])
                     st.text(report_text)
                 else:
-                    st.info("💡 Include a 'Revenue' column in your CSV to see evaluation metrics.")
+                    st.info("Include a 'Revenue' column in your CSV to see evaluation metrics.")
 
             except Exception as e:
                 st.error(f"Error processing uploaded file: {str(e)}")
         else:
-            st.info("👈 Upload a CSV file from the sidebar to see predictions and evaluation results here.")
+            st.info("Upload a CSV file from the sidebar to see predictions and evaluation results here.")
             st.markdown("""
             **Instructions:**
             1. Select a model from the sidebar dropdown
@@ -512,7 +512,6 @@ def main():
         """)
 
         st.markdown("---")
-        st.markdown("*Built for BITS WILP — Machine Learning Assignment 2*")
 
 
 if __name__ == "__main__":
